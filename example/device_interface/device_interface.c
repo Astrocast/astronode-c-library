@@ -1,5 +1,8 @@
 #include "device_interface.h"
 
+void di_device_initialize(void){
+
+}
 
 // Astronode UART
 return_status_t di_uart_astronode_write(const uint8_t *p_data, uint16_t length){

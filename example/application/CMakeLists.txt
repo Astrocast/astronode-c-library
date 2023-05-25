@@ -1,8 +1,6 @@
-add_library(application STATIC
-        main.c
-        )
+project(application_example)
 
-target_include_directories(astronode_lib PUBLIC
-        ${CMAKE_CURRENT_LIST_DIR}
-        )
+add_executable(${PROJECT_NAME} main.c)
+
+target_link_libraries(${PROJECT_NAME} astronode_lib device_interface)
 

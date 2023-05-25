@@ -8,6 +8,11 @@ typedef enum return_status_t
 } return_status_t;
 
 /**
+ * @brief Initialize hardware
+ */
+void di_device_initialize(void);
+
+/**
  * @brief Send an amount of data in blocking mode to astronode uart.
  * @param p_tx_buffer Pointer to data buffer.
  * @param len Amount of data elements to be sent.
@@ -46,7 +51,6 @@ void di_gpio_astronode_write_reset_pin(bool state);
  * @return True if signal is high.
  */
 bool di_gpio_astronode_read_event_pin(void);
-
 
 /**
  * @brief Set the astronode wake-up pin value.

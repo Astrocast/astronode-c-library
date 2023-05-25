@@ -198,7 +198,7 @@ as_return_status_t astronode_request_configuration_r(configuration_r_response_t 
     configuration_r_serialize(&request);
 
     as_return_status_t ans_status = astronode_transport_send_receive(&request, &answer);
-    if (ans_status != RS_ASSET_SUCCESS) 
+    if (ans_status != RS_ASSET_SUCCESS)
     {
         return ans_status;
     }
