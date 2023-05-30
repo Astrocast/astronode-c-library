@@ -19,7 +19,7 @@ uint32_t di_clock_get_system_tick(void){
 }
 
 bool di_clock_is_systick_timeout_over(uint32_t starting_value, uint32_t duration){
-    return false;
+    return (di_clock_get_system_tick() - starting_value > duration) ? true : false;
 }
 
 void di_gpio_astronode_write_wake_up_pin(bool state)

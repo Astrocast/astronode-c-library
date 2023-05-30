@@ -60,6 +60,18 @@ asset─────────────────────────
 
 
 ### Folder structure
+
+```c
+├── example                     //
+│   ├── application             // application example
+│   └── device_interface        //  
+├── src                         // c library 
+└── test                        //
+    ├── external                // test framework (modified unity and fff)
+    └── test                    // test files
+```
+
+### Library files
 | Files                 | Content                                                                                                                                                          |
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | astronode_application | Serialize and deserialize astronode commands. [online doc.](https://docs.astrocast.com/docs/products/astronode-api/protocol-layer/application-layer-description) |
@@ -77,7 +89,7 @@ Enabling/disabling modes is done in astronode_definitions.h: <br>
 `ASTRONODE_TRANSPORT_BLOCKING_MODE` <br>
 `ASTRONODE_TRANSPORT_ASYNC_MODE` <br>
 
-### Device interface
+### Device interface (this section is important)
 In order to interface with the hardware, the library will call generic functions located in device_interface file. 
 All device interface function should be mapped to the corresponding HAL functions of the specific platform. 
 
@@ -203,3 +215,35 @@ The gpio event, reset and wake-up can be controlled by the functions located in 
 
 ## Compiler and build options
 
+```bash
+mkdir build 
+cd build 
+cmake .. 
+make 
+```
+
+### Use the library
+Copy the library and the device_interface.c.h in your project. Fill the device_interface. Then, depending on your compiler, set the cross-compiler path:\
+example:
+```bash
+set(path your-compiler-path)
+set(prefix your-compiler-prefix)
+
+set(CMAKE_C_COMPILER ${path}${prefix}gcc)
+set(CMAKE_ASM_COMPILER ${path}${prefix}gcc)
+set(CMAKE_OBJCOPY ${path}${prefix}objcopy)
+set(CMAKE_OBJDUMP ${path}${prefix}objdump)
+set(CMAKE_SIZE ${path}${prefix}size)
+```
+
+### Tests
+To run the tests, first, compile the code as mentioned before, then run the following lines.
+```bash
+cd test
+ctest --verbose
+```
+
+The test setup is composed by a modified version of fff and unity. \
+Unity: http://www.throwtheswitch.org/ \
+fff: https://github.com/meekrosoft/fff \
+See this [article on our homepage](https://honeytreelabs.com/posts/cmake-unity-integration/) for a detailed description of this project. 
