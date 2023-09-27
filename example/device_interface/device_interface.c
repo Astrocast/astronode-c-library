@@ -34,7 +34,7 @@ void di_gpio_astronode_write_reset_pin(bool state)
 
 bool di_gpio_astronode_read_event_pin(void)
 {
-
+    return false;
 }
 
 void di_gpio_register_event_pin_it_callback(void (*function_pointer)(void))
