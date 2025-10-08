@@ -166,11 +166,18 @@ int main(void)
 }
 ```
 
-### Use asynchronous mode example
-First, configure your device to receive characters from the Astonode by interrupt. Then register the callback:
-> di_uart_astronode_register_rx_it_callback(astronode_transport_it_receive_char_handler);
+> [!NOTE]
+> For this example to work, at least the following device interface functions must be implemented:
+> - *di_uart_astronode_write*
+> - *di_uart_astronode_receive_char*
+> - *di_clock_get_system_tick*
+> - *di_clock_is_systick_timeout_over*
 
-By this way, the function astronode_transport_it_receive_char_handler will be notified when a character is received.
+### Use asynchronous mode example
+First, configure your device to receive characters from the Astonode by interrupt, then from the interrupt call:
+> astronode_transport_it_receive_char_handler(uint8_t rx_char);
+
+for each received character.
 
 Example to read the configuration of the Astronode:
 ```c
@@ -181,7 +188,6 @@ Example to read the configuration of the Astronode:
 int main(void)
 {
     di_device_initialize();
-    di_uart_user_register_rx_it_callback(user_interface_rx_interrupt_handler);
 
     // Send the command
     as_return_status_t ret = astronode_send_async_configuration_r();   
@@ -204,10 +210,16 @@ int main(void)
     }
     else
     {
-        // Error    
+        // Error
     }
 }
 ```
+
+> [!NOTE]
+> For this example to work, at least the following device interface functions must be implemented:
+> - *di_uart_astronode_write*
+> - *di_clock_get_system_tick*
+> - *di_clock_is_systick_timeout_over*
 
 ## GPIO
 The gpio event, reset and wake-up can be controlled by the functions located in astronode_gpio.c. 

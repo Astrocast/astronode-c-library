@@ -21,52 +21,27 @@ void di_device_initialize(void);
 return_status_t di_uart_astronode_write(const uint8_t *p_tx_buffer, uint16_t len);
 
 /**
- * @brief Register the function that is called when a character is received (in interrupt mode).
- * @param function_pointer Pointer to the callback function. Char argument is the received char.
- */
-void di_uart_astronode_register_rx_it_callback(void (*function_pointer)(uint8_t));
-
-/**
- * @brief
- * @param p_rx_char
- * @return
+ * @brief Receive a character from Astronode uart in blocking mode.
+ * @param p_rx_char Pointer to the received character.
+ * @return RS_SUCCESS if a character is received and copied to p_rx_char, RS_FAILURE otherwise.
  */
 return_status_t di_uart_astronode_receive_char(uint8_t *p_rx_char);
 
 /**
  * @brief Set the astronode wake-up pin value.
- * @param state
- */
-void di_gpio_astronode_write_wake_up_pin(bool state);
-
-/**
- * @brief Set the astronode reset pin value. Astronode reset is active on rising edge.
- * To reset the Astronode, the pin must be high for 1ms.
- * @param state
- */
-void di_gpio_astronode_write_reset_pin(bool state);
-
-/**
- * @brief Returns the astronode event pin value.
- * @return True if signal is high.
- */
-bool di_gpio_astronode_read_event_pin(void);
-
-/**
- * @brief Set the astronode wake-up pin value.
- * @param state
+ * @param state True to set the pin high, false to set it low.
  */
 void di_gpio_astronode_write_wake_up_pin(bool state);
 
 /**
  * @brief Set the astronode reset pin value.
- * @param state
+ * @param state True to set the pin high, false to set it low.
  */
 void di_gpio_astronode_write_reset_pin(bool state);
 
 /**
- * @brief Returns the astronode event pin value.
- * @return True if signal is high.
+ * @brief Return the astronode event pin value.
+ * @return True if the pin is high, false if it is low.
  */
 bool di_gpio_astronode_read_event_pin(void);
 
